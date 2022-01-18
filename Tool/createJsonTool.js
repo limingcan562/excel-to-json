@@ -6,30 +6,52 @@ const colors = require('colors');
 const ora = require('ora');
 
 
+/**
+ * @startRow 从第几行开始拿值(默认第2行)
+ * @outPath 输出位置
+ * @fileName 要转换的excel表格
+ */
+
+
 module.exports = ({
+    startRow = 2,
     fileName,
     importPath = './doc',
     outPath,
+    fixedKeyName,
     commonKey = 'category'
 }) => {
     // 读取excel中所有工作表的数据
     const 
     xlsxList = xlsxrd.parse(path.join(__dirname, `${importPath}${fileName}.xlsx`)),
     finalResult = [];
-    
+
+    // console.log(xlsxList[0].data);
+
     xlsxList.forEach(item => {
         const 
         xlsxData = item.data,
         xlsxName = item.name,
-        keyData = xlsxData[1],
-        renderData = xlsxData.slice(2),
+        keyData = xlsxData[startRow - 1], // 每项数据里的key
+        renderData = xlsxData.slice(2), // 每项数据里的key 里面对应的value
+        fixedKeyIndex = keyData.findIndex(item => item === fixedKeyName),
         xlsxEveryData = {},
         categoryData = [];
 
         xlsxEveryData['xlsxName'] = xlsxName;
         // console.log(`${'[info]'.bold} 开始生成${xlsxName}.json文件`.yellow);
         const createAni = ora(`正在生成${xlsxName}.json文件`);
+        // createAni.start();
+        // console.log(keyData);
         // console.log(renderData);
+        // console.log(fixedKeyIndex);
+        // console.log(xlsxData);
+
+
+        if (fixedKeyIndex === -1) {
+            createAni.fail('请确定Excel表格有'+ fixedKeyName + '字段');
+            return;
+        }
         
         // 先把相同的 类别 归类
         renderData.forEach((renderDataItem) => {
