@@ -4,8 +4,7 @@
   "description": "可以利用excel表格生成json文件的工具",
   "main": "index.js",
   "scripts": {
-    "create": "node ./Tool/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "create": "node ./Tool/index.js"
   },
   "keywords": [
     "json",
@@ -14,7 +13,7 @@
   "author": "lMC",
   "license": "ISC",
   "devDependencies": {
-    "chalk": "^5.0.0",
+    "chalk": "^2.4.2",
     "colors": "^1.4.0",
     "node-xlsx": "^0.17.2",
     "ora": "^5.4.1"
