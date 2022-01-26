@@ -2,7 +2,6 @@
 const xlsxrd = require('node-xlsx');
 const path = require('path');
 const fs = require('fs');
-const colors = require('colors');
 const ora = require('ora');
 const chalk = require('chalk');
 
@@ -13,12 +12,27 @@ const chalk = require('chalk');
  */
 
 module.exports = {
-    create({startRow = 2, fileName, importPath, outPath, outJsonName, fixedKeyName}) {
+    async create({startRow = 2, fileName, importPath, outPath, outJsonName, fixedKeyName}) {
         // console.log(this);
+        // 判断表格路径是否存在
+        if (!this.judgeExist(importPath)) {
+            ora(`请确认${chalk.red(importPath)}路径是否存在`).fail();
+            return;
+        }
+
         // 读取excel中所有工作表的数据
         const 
         xlsxList = xlsxrd.parse(path.join(__dirname, `${importPath}${fileName}.xlsx`)),
         finalResult = []; // 最后要输出的json数据，有多少个sheet 就有多少个json
+
+        // 输出文件夹存在 --> 清空文件夹内容（不用unlinkSync是因为权限问题）
+        if (this.judgeExist(outPath)) {
+            fs.rmdirSync(path.join(__dirname, outPath), {recursive : true});
+        }
+        // 输出文件夹不存在，创建文件夹
+        fs.mkdirSync(path.join(__dirname, outPath), true); 
+        
+
 
         // console.log(xlsxList[0].data);
         // console.log(xlsxList);
@@ -115,5 +129,20 @@ module.exports = {
             // console.err(JSON.stringify(`${xlsxName}.json文件生成错误：${JSON.stringify(err)}`));
             console.log(err);
         });
+    },
+
+    // 判断文件存不存在
+    judgeExist(outPath) {
+        let flag = false;
+        try {
+            fs.accessSync(path.join(__dirname, outPath));
+            // console.log('can read/write');
+            flag = true;
+            return flag;
+        } catch (err) {
+            // console.error('no access!');
+            flag = false;
+            return flag;
+        }
     }
 }
