@@ -12,7 +12,14 @@ const chalk = require('chalk');
  */
 
 module.exports = {
-    async create({startRow = 2, excelFileName, importPath, outPath, outJsonName, fixedKeyName}) {
+    create({
+        startRow = 2,
+        importPath = '../excel/',
+        outPath = '../json/',
+        outJsonName = ['data1', 'data2', 'data3'],
+        excelFileName = '配置文件',
+        fixedKeyName = 'fixedKey'
+    } = {}) {
         // console.log(this);
         // 判断表格路径是否存在
         if (!this.judgeExist(importPath)) {

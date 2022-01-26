@@ -17,9 +17,9 @@
 
 ## 方法入参说明
 |  参数名称  | 类型 | 默认值 | 说明  
-|  ----  | --- | ---- | ---- |
+|  :-:  | :-: | :-: | --- |
 | `importPath`  |`String` | `../excel/` | 表格存放的路径 
 | `excelFileName` |`String` | 配置文件 | 要编译的`Excel`表格文件名 
 | `outPath` |`String` |`../json/` | 输出的`json`文件路径 |
 | `outJsonName` |`Array` | `['data1', 'data2', 'data3']` | 输出名为`data1,data2,data3`的`json`，若值为`''`，则输出的`json`的名字以`Sheet`里的命名为主
-| `fixedKeyName` | `String` | `fixedKey` |  `Excel`表格内**必须有此字段**，这样才能讲相同`key`值的数据归类
+| `fixedKeyName` | `String` | `fixedKey` |  `Excel`表格内**必须有此字段**，这样才能将相同`key`值的数据归类
