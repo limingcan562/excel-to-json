@@ -8,11 +8,11 @@ const chalk = require('chalk');
 /**
  * @startRow 从第几行开始拿值(默认第2行)
  * @outPath 输出位置
- * @fileName 要转换的excel表格
+ * @excelFileName 要转换的excel表格
  */
 
 module.exports = {
-    async create({startRow = 2, fileName, importPath, outPath, outJsonName, fixedKeyName}) {
+    async create({startRow = 2, excelFileName, importPath, outPath, outJsonName, fixedKeyName}) {
         // console.log(this);
         // 判断表格路径是否存在
         if (!this.judgeExist(importPath)) {
@@ -22,7 +22,7 @@ module.exports = {
 
         // 读取excel中所有工作表的数据
         const 
-        xlsxList = xlsxrd.parse(path.join(__dirname, `${importPath}${fileName}.xlsx`)),
+        xlsxList = xlsxrd.parse(path.join(__dirname, `${importPath}${excelFileName}.xlsx`)),
         finalResult = []; // 最后要输出的json数据，有多少个sheet 就有多少个json
 
         // 输出文件夹存在 --> 清空文件夹内容（不用unlinkSync是因为权限问题）
