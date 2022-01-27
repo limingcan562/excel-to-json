@@ -1,0 +1,20 @@
+{
+    "xlsxName": "表格三",
+    "data1": [{
+        "title": "myTitle",
+        "sonTitle": "mySonTitle",
+        "desc": "myDesc",
+        "category": "type1"
+    }, {
+        "title": "myTitle2",
+        "sonTitle": "mySonTitle2",
+        "desc": "myDesc2",
+        "category": "type1"
+    }],
+    "data2": [{
+        "title": "myTitle3",
+        "sonTitle": "mySonTitle3",
+        "desc": "myDesc3",
+        "category": "type2"
+    }]
+}

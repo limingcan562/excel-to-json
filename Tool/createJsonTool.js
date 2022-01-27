@@ -5,19 +5,13 @@ const fs = require('fs');
 const ora = require('ora');
 const chalk = require('chalk');
 
-/**
- * @startRow 从第几行开始拿值(默认第2行)
- * @outPath 输出位置
- * @excelFileName 要转换的excel表格
- */
-
 module.exports = {
     create({
         startRow = 2,
         importPath = '../excel/',
+        excelFileName = '配置文件',
         outPath = '../json/',
         outJsonName = ['data1', 'data2', 'data3'],
-        excelFileName = '配置文件',
         fixedKeyName = 'fixedKey'
     } = {}) {
         // console.log(this);
